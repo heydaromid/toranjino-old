@@ -1,0 +1,35 @@
+@import url(fontiran.css);
+
+::selection {
+    background-color: #198754;
+    color: #fff;
+}
+
+body {
+    font-family: dana;
+}
+
+#h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: default;
+}
+
+.product {
+    width: 16rem;
+}
+
+#footer {
+    font-size: 14px;
+    font-weight: 500;
+    height: 60px;
+    margin-top: 2rem;
+    background-color: #eff2f5;
+    color: #868a8f;
+}
+
+@media (min-width:768px) {
+    #h1 {
+        font-size: 1.5rem;
+    }
+}
