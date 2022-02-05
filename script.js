@@ -34,13 +34,13 @@ const creatProduct = (productInfo) => {
         let btnDiv = document.createElement('div');
         let img = document.createElement('img');
         let h5 = document.createElement('h5');
-        let shop =  document.createElement('a');
-        let call =  document.createElement('a');
-    
+        let shop = document.createElement('a');
+        let call = document.createElement('a');
+
         // create card
         div.classList.add('card', 'product', 'shadow-sm', 'm-1');
         // create image
-        img.setAttribute('src' , image);
+        img.setAttribute('src', image);
         img.classList.add('card-img-top');
         // create card body
         cardBody.classList.add('card-body');
@@ -51,20 +51,37 @@ const creatProduct = (productInfo) => {
         // create btn divition
         btnDiv.classList.add('d-flex', 'justify-content-between');
         shop.classList.add('btn', 'btn-outline-success');
-        shop.setAttribute('href' , 'https://toranjino.com');
+        shop.setAttribute('href', 'https://toranjino.com');
         shop.innerHTML = 'خرید آنلاین';
         call.classList.add('btn', 'btn-success');
-        call.setAttribute('href' , `tel:02537839529`);
+        call.setAttribute('href', `tel:02537839529`);
         call.innerHTML = 'سفارش سریع';
         btnDiv.appendChild(shop);
         btnDiv.appendChild(call);
         cardBody.appendChild(btnDiv);
-    
+
         div.appendChild(img);
         div.appendChild(cardBody);
-    
-        main.append(div);  
+
+        main.append(div);
     }
 }
 
 getData();
+
+const input = document.getElementById('searchInput');
+input.addEventListener('keyup' , () => {
+    let filter = input.value;
+    const main = document.getElementById("main");
+    const card = main.getElementsByClassName('card');
+    
+    for (let i = 0; i < card.length; i++) {
+        const h5 = card[i].getElementsByTagName("h5")[0];
+        let txtValue = h5.textContent || h5.innerText ;
+        if (txtValue.indexOf(filter) > -1) {
+            card[i].style.display = "";
+        } else {
+            card[i].style.display = "none";
+        }
+    }
+});
