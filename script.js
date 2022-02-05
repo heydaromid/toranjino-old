@@ -54,7 +54,7 @@ const creatProduct = (productInfo) => {
         shop.setAttribute('href' , 'https://toranjino.com');
         shop.innerHTML = 'خرید آنلاین';
         call.classList.add('btn', 'btn-success');
-        call.setAttribute('href' , `https://web.whatsapp.com/send?phone=+989127482848&text=سلام محصول ${title} رو می‌خواستم تهیه کنم`);
+        call.setAttribute('href' , `tel:02537839529`);
         call.innerHTML = 'سفارش سریع';
         btnDiv.appendChild(shop);
         btnDiv.appendChild(call);
