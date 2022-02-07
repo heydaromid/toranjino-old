@@ -9,14 +9,26 @@ body {
     font-family: dana;
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #4b4b4b;
+}
+
 #h1 {
     font-size: 1.3rem;
     font-weight: 600;
     cursor: default;
 }
 
-.product {
-    width: 16rem;
+#productList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 #footer {
@@ -28,8 +40,15 @@ body {
     color: #868a8f;
 }
 
+.hidden {
+    display: none;
+}
+
 @media (min-width:768px) {
     #h1 {
         font-size: 1.5rem;
+    }
+    #productList {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }

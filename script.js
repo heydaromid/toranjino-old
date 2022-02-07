@@ -5,6 +5,8 @@ const url = `https://coda.io/apis/v1/docs/${docId}/tables/${tableIdOrName}/rows`
 const titleId = 'c-TxzORDiyts';
 const imageId = 'c-6rK19jk8yC';
 
+const spinner = document.querySelector('#spinner');
+
 const getData = () => {
     fetch(url, {
         method: 'GET',
@@ -13,16 +15,17 @@ const getData = () => {
             'Authorization': `Bearer ${token}`,
         },
     })
-        .then(response => response.json())
-        .then(data => {
-            return creatProduct(data.items);
-        })
-        .catch((error) => {
-            console.error('Error: ', error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        spinner.innerHTML = '';
+        return creatProduct(data.items);
+    })
+    .catch((error) => {
+        console.error('Error: ', error);
+    });
 }
 
-const main = document.querySelector('#main');
+const productList = document.querySelector('#productList');
 
 const creatProduct = (productInfo) => {
     for (let i = 0; i < productInfo.length; i++) {
@@ -33,55 +36,56 @@ const creatProduct = (productInfo) => {
         let cardBody = document.createElement('div');
         let btnDiv = document.createElement('div');
         let img = document.createElement('img');
-        let h5 = document.createElement('h5');
-        let shop = document.createElement('a');
+        let cardTitle = document.createElement('div');
+        // let shop = document.createElement('a');
         let call = document.createElement('a');
 
         // create card
-        div.classList.add('card', 'product', 'shadow-sm', 'm-1');
+        div.classList.add('card', 'product', 'shadow-sm');
         // create image
         img.setAttribute('src', image);
+        img.setAttribute('alt', title);
         img.classList.add('card-img-top');
         // create card body
         cardBody.classList.add('card-body');
         // create card title
-        h5.classList.add('card-title', 'text-center', 'mb-3');
-        h5.innerHTML = title;
-        cardBody.appendChild(h5);
+        cardTitle.classList.add('card-title', 'text-center', 'mb-3');
+        cardTitle.innerHTML = title;
+        cardBody.appendChild(cardTitle);
         // create btn divition
-        btnDiv.classList.add('d-flex', 'justify-content-between');
-        shop.classList.add('btn', 'btn-outline-success');
-        shop.setAttribute('href', 'https://toranjino.com');
-        shop.innerHTML = 'خرید آنلاین';
-        call.classList.add('btn', 'btn-success');
-        call.setAttribute('href', `tel:02537839529`);
+        // btnDiv.classList.add('d-flex', 'justify-content-between');
+        // shop.classList.add('btn', 'btn-outline-success');
+        // shop.setAttribute('href', 'https://toranjino.com');
+        // shop.innerHTML = 'خرید آنلاین';
+        call.classList.add('btn', 'btn-success', 'w-100');
+        call.setAttribute('href', 'tel:02537839529');
         call.innerHTML = 'سفارش سریع';
-        btnDiv.appendChild(shop);
+        // btnDiv.appendChild(shop);
         btnDiv.appendChild(call);
         cardBody.appendChild(btnDiv);
 
         div.appendChild(img);
         div.appendChild(cardBody);
 
-        main.append(div);
+        productList.append(div);
     }
 }
 
 getData();
 
-const input = document.getElementById('searchInput');
+const input = document.querySelector('#searchInput');
 input.addEventListener('keyup' , () => {
     let filter = input.value;
-    const main = document.getElementById("main");
-    const card = main.getElementsByClassName('card');
+    const list = document.querySelector('#productList');
+    const card = list.querySelectorAll('.card');
     
     for (let i = 0; i < card.length; i++) {
-        const h5 = card[i].getElementsByTagName("h5")[0];
-        let txtValue = h5.textContent || h5.innerText ;
+        const cardTitle = card[i].querySelectorAll('.card-title')[0];
+        let txtValue = cardTitle.textContent || cardTitle.innerText ;
         if (txtValue.indexOf(filter) > -1) {
-            card[i].style.display = "";
+            card[i].classList.remove('hidden');
         } else {
-            card[i].style.display = "none";
+            card[i].classList.add('hidden');
         }
     }
 });
