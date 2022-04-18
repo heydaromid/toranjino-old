@@ -52,3 +52,12 @@ body {
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
+
+@media (min-width:1200px) {
+    #h1 {
+        font-size: 1.5rem;
+    }
+    #productList {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
